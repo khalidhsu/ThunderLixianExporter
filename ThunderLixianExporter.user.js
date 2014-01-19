@@ -58,6 +58,20 @@ TLE.exporter = {
     });
     TLE.text_pop("wget download command", str);
   },
+
+    'mplayer': function(todown) {
+        //console.log(todown);
+        var str = "";
+        $.each(todown.tasklist, function(n, task) {
+            $.each(task.filelist, function(l, file) {
+                if (!file.downurl) return;
+                str +="mplayer -cache   15000 -cache-min  2  --http-header-fields='Cookie: gdriveid=" +todown.gdriveid +";' '"+file.downurl+"'\n";
+            });
+        });
+        TLE.text_pop("mplayer command", str);
+    },
+
+    
   "YAAW": function(todown) {
     if (TLE.getConfig("TLE_aria2_jsonrpc")) {
       show_tip("添加中...到YAAW界面查看是否添加成功");
